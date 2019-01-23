@@ -1,5 +1,5 @@
 #!/bin/bash
-dbName="test.db"
+dbName="people.db"
 
 function create_db() {
     sqlite3 $dbName "CREATE TABLE People (id INTEGER PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL, email TEXT);"
