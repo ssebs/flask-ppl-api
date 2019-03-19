@@ -20,3 +20,71 @@ Person Database REST api using flask/sqlite
 4. Run python file
     1. `$python3 main.py`
 
+### API urls:
+- GET
+  - `/people/all`
+  - e.g.
+  ```json
+    [
+        {
+            "id": 1, 
+            "first": "Bob", 
+            "last": "Smith", 
+            "email": "bob.smith+test@example.com"
+        }, 
+        {
+            "id": 2, 
+            "first": "Tom", 
+            "last": "Selic", 
+            "email": "Tom.Selic123@example.com"
+        }, 
+        {
+            "id": 3, 
+            "first": "Janie", 
+            "last": "Doh", 
+            "email": "jdoe45@example.com"
+        }, 
+        {
+            "id": 4, 
+            "first": "Giselle M.", 
+            "last": "Reyes", 
+            "email": "gmr123@example.com"
+        }
+    ]
+  ``` 
+  - `/people/bob`
+    - e.g.
+    ```json
+    [
+        {
+            "id": 1,
+            "first": "Bob",
+            "last": "Smith",
+            "email": "bob.smith+test@example.com"
+        }
+    ]
+    ```
+  - `/people/1`
+    - e.g.
+    ```json
+    [
+        {
+            "id": 1,
+            "first": "Bob",
+            "last": "Smith",
+            "email": "bob.smith+test@example.com"
+        }
+    ]
+    ```
+- POST
+  - .
+- PATCH
+  - `/people/update`
+  - e.g. json needed
+    ```json
+    {
+    "id":3, 
+    "first":"Janie",
+    "last":"Doh",
+    "email":"jdoe45@example.com"
+    }```
