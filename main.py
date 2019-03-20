@@ -68,17 +68,17 @@ def get_person_by_name(param):
     return json.dumps(ret)
 # get_person_by_name
 
-# TODO: Make this a POST
-@app.route('/people/create/')
+# TODO: check if user already exists, likely needs username
+@app.route('/people/create', methods=['POST'])
 @cross_origin()
 def create_person():
-    # sample request: /people/create/?first=blah&last=foo's&email=foo-3@bar.com
-
+    # sample request: /people/create/ , data = {first:"tom", last:"selic", email: "tselic@test.com"}
+    data = request.json
     db = query.Query("people.db")
 
     qry = "INSERT INTO People VALUES (NULL, ?, ?, ?);"
-    var_tupl = (request.args['first'],
-                request.args['last'], request.args['email'])
+    var_tupl = (data['first'],
+                data['last'], data['email'])
     db.run_insert_qry(qry, var_tupl)
     return '{"status": "OK"}'
 # create_person
