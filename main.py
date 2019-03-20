@@ -11,9 +11,6 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 CORS(app, resources={r"/people/*": {"origins": "*"}})
 
-# TODO: Add POST's 
-
-
 @app.route('/')
 @app.route('/people/')
 @app.route('/people/%')
@@ -79,8 +76,8 @@ def create_person():
     qry = "INSERT INTO People VALUES (NULL, ?, ?, ?);"
     var_tupl = (data['first'],
                 data['last'], data['email'])
-    db.run_insert_qry(qry, var_tupl)
-    return '{"status": "OK"}'
+    new_id = db.run_insert_qry(qry, var_tupl)
+    return '{"status": "OK", "id":' + str(new_id) + '}', 201
 # create_person
 
 # TODO: Make this a PATCH

@@ -45,10 +45,12 @@ class Query():
     def run_insert_qry(self, p_qry, p_vars_tupl):
         '''
         Run sql INSERT query
+        :return: new ID
         '''
         cur = self.conn.cursor()
         cur.execute(p_qry, p_vars_tupl)
         self.conn.commit()
+        return cur.lastrowid
     #run_insert_qry
 
     def run_update_qry(self, p_qry, p_vars_tupl):
