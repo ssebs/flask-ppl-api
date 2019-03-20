@@ -9,9 +9,9 @@ import json
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/people/*": {"origins": "*"}})
 
-# TODO: Add POST's & UPDATE's
+# TODO: Add POST's 
 
 
 @app.route('/')
@@ -84,7 +84,7 @@ def create_person():
 # create_person
 
 # TODO: Make this a PATCH
-@app.route('/people/update', methods=['PATCH'])
+@app.route('/people/update', methods=['PATCH', 'OPTIONS'])
 @cross_origin()
 def update_person():
     # note that request needs data in all the fields
@@ -94,7 +94,7 @@ def update_person():
 
     qry = "UPDATE People SET first_name=?, last_name=?, email=? WHERE id = ?;"
     var_tupl = (data['first'], data['last'], data['email'], data['id'])
-    
+
     db.run_update_qry(qry, var_tupl)
     return '{"status": "OK"}'
 # create_person
