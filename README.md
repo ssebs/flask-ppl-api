@@ -87,9 +87,17 @@ Person Database REST api using flask/sqlite
   - e.g. json needed
     ```json
     {
-        "id":3, 
+        "id": 3, 
         "first":"Janie",
         "last":"Doh",
         "email":"jdoe45@example.com"
+    }
+    ```
+- DELETE
+  - `/people/delete`
+  - e.g. json needed
+    ```json
+    {
+        "id": 3
     }
     ```

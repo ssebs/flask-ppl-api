@@ -9,8 +9,22 @@ CORS(app, resources={r"/people/*": {"origins": "*"}})
 
 ### 
 # main.py
-# - The main file used to run API service from angular <-> sqlite
+# The main file used to run API service from angular <-> sqlite
+#
+# List of route methods:
+# - GET list all people
+# - GET get 1 person via id
+# - GET get all people matching string
+# - POST create person
+# - PATCH update person
+# - DELETE delete person
+#
+# TODO: 
+# - fix duplicate issue in create person
+# - fix unit tests
+# - cleanup
 ###
+
 
 #### list all ####
 @app.route('/')
@@ -33,6 +47,7 @@ def get_all_people():
     # return str(ret).replace("'",'"')
 # get_all_people
 
+
 #### get single person via id ####
 @app.route('/people/<int:param>')
 @cross_origin()
@@ -49,6 +64,7 @@ def get_person_by_id(param):
         ret = tmp
     return json.dumps(ret)
 # get_person_by_id
+
 
 #### get people via string in name (search) ####
 @app.route('/people/<string:param>')
@@ -67,6 +83,7 @@ def get_person_by_name(param):
     return json.dumps(ret)
 # get_person_by_name
 
+
 # TODO: check if user already exists, likely needs username
 #### create person ####
 @app.route('/people/create', methods=['POST'])
@@ -82,6 +99,7 @@ def create_person():
     new_id = db.run_insert_qry(qry, var_tupl)
     return '{"status": "OK", "id":' + str(new_id) + '}', 201
 # create_person
+
 
 #### update person ####
 @app.route('/people/update', methods=['PATCH', 'OPTIONS'])
@@ -99,7 +117,7 @@ def update_person():
     return '{"status": "OK"}'
 # create_person
 
-# TODO: Make this a POST
+
 #### delete a single person ####
 @app.route('/people/delete', methods=['DELETE'])
 @cross_origin()
