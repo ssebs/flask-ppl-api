@@ -55,36 +55,41 @@ Person Database REST api using flask/sqlite
   - `/people/bob`
     - e.g.
     ```json
-    [
-        {
-            "id": 1,
-            "first": "Bob",
-            "last": "Smith",
-            "email": "bob.smith+test@example.com"
-        }
-    ]
+    {
+        "id": 1,
+        "first": "Bob",
+        "last": "Smith",
+        "email": "bob.smith+test@example.com"
+    }
     ```
   - `/people/1`
     - e.g.
     ```json
-    [
-        {
-            "id": 1,
-            "first": "Bob",
-            "last": "Smith",
-            "email": "bob.smith+test@example.com"
-        }
-    ]
+    {
+        "id": 1,
+        "first": "Bob",
+        "last": "Smith",
+        "email": "bob.smith+test@example.com"
+    }
     ```
 - POST
-  - .
+  - `/people/create`
+  - e.g. json needed
+    ```json
+    {
+        "first":"Janie",
+        "last":"Doh",
+        "email":"jdoe45@example.com"
+    }
+    ```
 - PATCH
   - `/people/update`
   - e.g. json needed
     ```json
     {
-    "id":3, 
-    "first":"Janie",
-    "last":"Doh",
-    "email":"jdoe45@example.com"
-    }```
+        "id":3, 
+        "first":"Janie",
+        "last":"Doh",
+        "email":"jdoe45@example.com"
+    }
+    ```
