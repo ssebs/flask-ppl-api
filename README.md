@@ -98,6 +98,6 @@ Person Database REST api using flask/sqlite
   - e.g. json needed
     ```json
     {
-        "id": 3
+        "id": "3"
     }
     ```
