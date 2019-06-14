@@ -1,6 +1,6 @@
 # flask-ppl-api
 
-Person Database REST api using flask/sqlite
+Person Database REST api using flask/sqlite/sqlalchemy
 
 ### Requirements to build/run:
 - python3
@@ -8,47 +8,63 @@ Person Database REST api using flask/sqlite
     - pysqlite3
     - flask
     - flask-cors
+    - sqlalchemy
+    - flask_sqlalchemy
+    - flask_migrate
 - sqlite3
 
 ### How to Build / Run:
 1. Clone this repo
 2. install requirements
     1. `$ apt install nodejs npm python3 python3-pip`
-    3. `$ pip3 install flask flask-cors pysqlite3 `
-3. Run init script for sqlite (optional, should run on first use for python)
-    1. `./init_db.sh`
+    3. `$ pip3 install flask flask-cors pysqlite3 sqlalchemy flask_sqlalchemy flask_migrate`
+3. Run init script for sqlite
+    1. `./initdb.sh`
 4. Run python file
-    1. `$python3 main.py`
+    1. `$ python3 run.py`
+
 
 ### API urls:
 - GET
-  - `/people/all`
+  - `/people/`
   - e.g.
   ```json
     [
         {
             "id": 1, 
-            "first": "Bob", 
-            "last": "Smith", 
+            "first_name": "Bob", 
+            "last_name": "Smith", 
             "email": "bob.smith+test@example.com"
         }, 
         {
             "id": 2, 
-            "first": "Tom", 
-            "last": "Selic", 
+            "first_name": "Tom", 
+            "last_name": "Selic", 
             "email": "Tom.Selic123@example.com"
         }, 
         {
             "id": 3, 
-            "first": "Janie", 
-            "last": "Doh", 
+            "first_name": "Janie", 
+            "last_name": "Doh", 
             "email": "jdoe45@example.com"
         }, 
         {
             "id": 4, 
-            "first": "Giselle M.", 
-            "last": "Reyes", 
+            "first_name": "Giselle M.", 
+            "last_name": "Reyes", 
             "email": "gmr123@example.com"
+        }
+    ]
+  ``` 
+  - `/people?q=bo`
+  - e.g.
+  ```json
+    [
+        {
+            "id": 1, 
+            "first_name": "Bob", 
+            "last_name": "Smith", 
+            "email": "bob.smith+test@example.com"
         }
     ]
   ``` 
@@ -57,47 +73,41 @@ Person Database REST api using flask/sqlite
     ```json
     {
         "id": 1,
-        "first": "Bob",
-        "last": "Smith",
+        "first_name": "Bob",
+        "last_name": "Smith",
         "email": "bob.smith+test@example.com"
     }
     ```
-  - `/people/1`
+  - `/people/:id`
     - e.g.
     ```json
     {
         "id": 1,
-        "first": "Bob",
-        "last": "Smith",
+        "first_name": "Bob",
+        "last_name": "Smith",
         "email": "bob.smith+test@example.com"
     }
     ```
 - POST
-  - `/people/create`
+  - `/people/`
   - e.g. json needed
     ```json
     {
-        "first":"Janie",
-        "last":"Doh",
+        "first_name":"Janie",
+        "last_name":"Doh",
         "email":"jdoe45@example.com"
     }
     ```
-- PATCH
-  - `/people/update`
+- PATCH / PUT
+  - `/people/:id`
   - e.g. json needed
     ```json
     {
         "id": 3, 
-        "first":"Janie",
-        "last":"Doh",
+        "first_name":"Jane",
+        "last_name":"Doh",
         "email":"jdoe45@example.com"
     }
     ```
 - DELETE
-  - `/people/delete`
-  - e.g. json needed
-    ```json
-    {
-        "id": "3"
-    }
-    ```
+  - `/people/:id`
